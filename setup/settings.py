@@ -47,6 +47,7 @@ THIRD_APPS = [
 
 MY_APPS = [
     "mangas.apps.MangasConfig",
+    "api.apps.ApiConfig",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_APPS + MY_APPS
