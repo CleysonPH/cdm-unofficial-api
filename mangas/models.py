@@ -44,20 +44,8 @@ class Manga(BaseModel):
         blank=False,
         null=True,
     )
-    genre = models.ForeignKey(
-        "mangas.Genre",
-        verbose_name="Gênero",
-        on_delete=models.SET_NULL,
-        blank=False,
-        null=True,
-    )
-    type = models.ForeignKey(
-        "mangas.Type",
-        verbose_name="Tipo",
-        on_delete=models.SET_NULL,
-        blank=False,
-        null=True,
-    )
+    genres = models.ManyToManyField("mangas.Genre", verbose_name="Gênero")
+    types = models.ManyToManyField("mangas.Type", verbose_name="Tipos")
     summary = models.TextField("Resumo", blank=False, null=True)
 
     class Meta:
