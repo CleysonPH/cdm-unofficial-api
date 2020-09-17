@@ -45,7 +45,9 @@ THIRD_APPS = [
     "rest_framework",
 ]
 
-MY_APPS = []
+MY_APPS = [
+    "mangas.apps.MangasConfig",
+]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_APPS + MY_APPS
 
