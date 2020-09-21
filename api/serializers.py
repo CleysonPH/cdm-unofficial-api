@@ -20,3 +20,9 @@ class MangaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Manga
         exclude = ("created_at", "modified_at")
+
+
+class AuthorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Author
+        exclude = ("created_at", "modified_at")
