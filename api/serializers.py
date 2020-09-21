@@ -32,3 +32,9 @@ class DesignerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Designer
         exclude = ("created_at", "modified_at")
+
+
+class GenreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Genre
+        exclude = ("created_at", "modified_at")
