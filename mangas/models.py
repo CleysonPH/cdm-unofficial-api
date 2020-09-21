@@ -22,9 +22,11 @@ class Manga(BaseModel):
         (5, "Pausado"),
     )
 
-    cdm_id = models.CharField("CDM ID", max_length=255, blank=False, null=False)
+    cdm_id = models.CharField(
+        "CDM ID", max_length=255, blank=False, null=False, unique=True
+    )
     title = models.CharField("Título", max_length=255, blank=False, null=False)
-    link = models.URLField("Link", max_length=255, blank=False, null=False)
+    link = models.URLField("Link", max_length=255, blank=False, null=False, unique=True)
     img_url = models.URLField("Imagem", max_length=255, blank=False, null=True)
     publish_year = models.IntegerField("Ano", blank=False, null=True)
     status = models.IntegerField(
@@ -57,7 +59,7 @@ class Manga(BaseModel):
 
 
 class Author(BaseModel):
-    name = models.CharField("Nome", max_length=125)
+    name = models.CharField("Nome", max_length=125, unique=True)
 
     class Meta:
         verbose_name = "autor"
@@ -68,7 +70,7 @@ class Author(BaseModel):
 
 
 class Designer(BaseModel):
-    name = models.CharField("Nome", max_length=125)
+    name = models.CharField("Nome", max_length=125, unique=True)
 
     class Meta:
         verbose_name = "artista"
@@ -79,7 +81,7 @@ class Designer(BaseModel):
 
 
 class Genre(BaseModel):
-    name = models.CharField("Nome", max_length=125)
+    name = models.CharField("Nome", max_length=125, unique=True)
 
     class Meta:
         verbose_name = "gênero"
@@ -90,7 +92,7 @@ class Genre(BaseModel):
 
 
 class Type(BaseModel):
-    name = models.CharField("Nome", max_length=125)
+    name = models.CharField("Nome", max_length=125, unique=True)
 
     class Meta:
         verbose_name = "tipo"
