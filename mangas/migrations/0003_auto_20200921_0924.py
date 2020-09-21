@@ -6,38 +6,38 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('mangas', '0002_auto_20200917_1427'),
+        ("mangas", "0002_auto_20200917_1427"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='author',
-            name='name',
-            field=models.CharField(max_length=125, unique=True, verbose_name='Nome'),
+            model_name="author",
+            name="name",
+            field=models.CharField(max_length=125, unique=True, verbose_name="Nome"),
         ),
         migrations.AlterField(
-            model_name='designer',
-            name='name',
-            field=models.CharField(max_length=125, unique=True, verbose_name='Nome'),
+            model_name="designer",
+            name="name",
+            field=models.CharField(max_length=125, unique=True, verbose_name="Nome"),
         ),
         migrations.AlterField(
-            model_name='genre',
-            name='name',
-            field=models.CharField(max_length=125, unique=True, verbose_name='Nome'),
+            model_name="genre",
+            name="name",
+            field=models.CharField(max_length=125, unique=True, verbose_name="Nome"),
         ),
         migrations.AlterField(
-            model_name='manga',
-            name='cdm_id',
-            field=models.CharField(max_length=255, unique=True, verbose_name='CDM ID'),
+            model_name="manga",
+            name="cdm_id",
+            field=models.CharField(max_length=255, unique=True, verbose_name="CDM ID"),
         ),
         migrations.AlterField(
-            model_name='manga',
-            name='link',
-            field=models.URLField(max_length=255, unique=True, verbose_name='Link'),
+            model_name="manga",
+            name="link",
+            field=models.URLField(max_length=255, unique=True, verbose_name="Link"),
         ),
         migrations.AlterField(
-            model_name='type',
-            name='name',
-            field=models.CharField(max_length=125, unique=True, verbose_name='Nome'),
+            model_name="type",
+            name="name",
+            field=models.CharField(max_length=125, unique=True, verbose_name="Nome"),
         ),
     ]

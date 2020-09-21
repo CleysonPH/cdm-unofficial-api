@@ -5,8 +5,9 @@ from .serializers import (
     AuthorSerializer,
     DesignerSerializer,
     GenreSerializer,
+    TypeSerializer,
 )
-from mangas.models import Manga, Author, Designer, Genre
+from mangas.models import Manga, Author, Designer, Genre, Type
 
 
 class MangaViewSet(viewsets.ModelViewSet):
@@ -29,3 +30,9 @@ class GenreViewSet(viewsets.ModelViewSet):
     lookup_field = "name"
     serializer_class = GenreSerializer
     queryset = Genre.objects.all()
+
+
+class TypeViewSet(viewsets.ModelViewSet):
+    lookup_field = "name"
+    serializer_class = TypeSerializer
+    queryset = Type.objects.all()
