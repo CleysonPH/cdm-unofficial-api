@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 
-from .serializers import MangaSerializer, AuthorSerializer
-from mangas.models import Manga, Author
+from .serializers import MangaSerializer, AuthorSerializer, DesignerSerializer
+from mangas.models import Manga, Author, Designer
 
 
 class MangaViewSet(viewsets.ModelViewSet):
@@ -13,3 +13,8 @@ class MangaViewSet(viewsets.ModelViewSet):
 class AuthorViewSet(viewsets.ModelViewSet):
     serializer_class = AuthorSerializer
     queryset = Author.objects.all()
+
+
+class DesignerViewSet(viewsets.ModelViewSet):
+    serializer_class = DesignerSerializer
+    queryset = Designer.objects.all()

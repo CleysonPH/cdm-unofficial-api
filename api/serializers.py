@@ -26,3 +26,9 @@ class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
         exclude = ("created_at", "modified_at")
+
+
+class DesignerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Designer
+        exclude = ("created_at", "modified_at")
