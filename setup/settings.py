@@ -43,6 +43,7 @@ DJANGO_APPS = [
 
 THIRD_APPS = [
     "rest_framework",
+    "django_filters",
 ]
 
 MY_APPS = [
