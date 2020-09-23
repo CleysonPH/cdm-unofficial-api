@@ -10,7 +10,25 @@ class MangaAdmin(admin.ModelAdmin):
     list_filter = ("status", "types", "genres", "author", "designer")
 
 
-admin.site.register(Author)
-admin.site.register(Designer)
-admin.site.register(Genre)
-admin.site.register(Type)
+@admin.register(Author)
+class AuthorAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+    search_fields = ("name",)
+
+
+@admin.register(Designer)
+class DesignerAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+    search_fields = ("name",)
+
+
+@admin.register(Genre)
+class GenreAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+    search_fields = ("name",)
+
+
+@admin.register(Type)
+class TypeAdmin(admin.ModelAdmin):
+    list_display = ("name",)
+    search_fields = ("name",)
