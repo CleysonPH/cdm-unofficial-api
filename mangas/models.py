@@ -53,6 +53,7 @@ class Manga(BaseModel):
     class Meta:
         verbose_name = "mangá"
         verbose_name_plural = "mangás"
+        ordering = ("created_at",)
 
     def __str__(self):
         return self.title
@@ -64,6 +65,7 @@ class Author(BaseModel):
     class Meta:
         verbose_name = "autor"
         verbose_name_plural = "autores"
+        ordering = ("created_at",)
 
     def __str__(self):
         return self.name
@@ -75,6 +77,7 @@ class Designer(BaseModel):
     class Meta:
         verbose_name = "artista"
         verbose_name_plural = "artistas"
+        ordering = ("created_at",)
 
     def __str__(self):
         return self.name
@@ -86,6 +89,7 @@ class Genre(BaseModel):
     class Meta:
         verbose_name = "gênero"
         verbose_name_plural = "gêneros"
+        ordering = ("created_at",)
 
     def __str__(self):
         return self.name
@@ -97,6 +101,7 @@ class Type(BaseModel):
     class Meta:
         verbose_name = "tipo"
         verbose_name_plural = "tipos"
+        ordering = ("created_at",)
 
     def __str__(self):
         return self.name
