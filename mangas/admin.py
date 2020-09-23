@@ -6,7 +6,7 @@ from .models import Manga, Author, Designer, Genre, Type
 @admin.register(Manga)
 class MangaAdmin(admin.ModelAdmin):
     list_display = ("title", "publish_year", "status", "author", "designer")
-    search_fields = ("title", "author")
+    search_fields = ("title",)
     list_filter = ("status", "types", "genres", "author", "designer")
 
 

@@ -5,16 +5,16 @@ from mangas.models import Manga, Author, Designer, Genre, Type
 
 class MangaSerializer(serializers.ModelSerializer):
     author = serializers.SlugRelatedField(
-        slug_field="name", queryset=Author.objects.all()
+        slug_field="name", queryset=Author.objects.all(), allow_null=True
     )
     designer = serializers.SlugRelatedField(
-        slug_field="name", queryset=Designer.objects.all()
+        slug_field="name", queryset=Designer.objects.all(), allow_null=True
     )
     genres = serializers.SlugRelatedField(
-        many=True, slug_field="name", queryset=Genre.objects.all()
+        many=True, slug_field="name", queryset=Genre.objects.all(), allow_null=True
     )
     types = serializers.SlugRelatedField(
-        many=True, slug_field="name", queryset=Type.objects.all()
+        many=True, slug_field="name", queryset=Type.objects.all(), allow_null=True
     )
 
     class Meta:

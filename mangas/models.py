@@ -30,7 +30,7 @@ class Manga(BaseModel):
     img_url = models.URLField("Imagem", max_length=255, blank=False, null=True)
     publish_year = models.IntegerField("Ano", blank=False, null=True)
     status = models.IntegerField(
-        "Status", choices=STATUS_CHOICES, blank=False, null=False
+        "Status", choices=STATUS_CHOICES, blank=False, null=True
     )
     author = models.ForeignKey(
         "mangas.Author",
