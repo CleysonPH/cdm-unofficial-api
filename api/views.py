@@ -1,3 +1,4 @@
+from django.shortcuts import get_object_or_404
 from rest_framework import status, viewsets
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
@@ -44,9 +45,9 @@ class TypeViewSet(viewsets.ModelViewSet):
 
 
 class AuthorMangas(APIView):
-    def get(self, request, author, format=None):
+    def get(self, request, name, format=None):
         pagination = PageNumberPagination()
-        mangas = Manga.objects.filter(author__name=author)
+        mangas = Manga.objects.filter(author__name=name)
         result = pagination.paginate_queryset(mangas, request)
         serializer = MangaSerializer(result, many=True)
 
@@ -54,9 +55,21 @@ class AuthorMangas(APIView):
 
 
 class DesignerMangas(APIView):
-    def get(self, request, designer, format=None):
+    def get(self, request, name, format=None):
         pagination = PageNumberPagination()
-        mangas = Manga.objects.filter(designer__name=designer)
+        mangas = Manga.objects.filter(designer__name=name)
+        result = pagination.paginate_queryset(mangas, request)
+        serializer = MangaSerializer(result, many=True)
+
+        return pagination.get_paginated_response(serializer.data)
+
+
+class GenreMangas(APIView):
+    def get(self, request, name, format=None):
+        genre = get_object_or_404(Genre, name=name)
+
+        pagination = PageNumberPagination()
+        mangas = Manga.objects.filter(genres__id=genre.id)
         result = pagination.paginate_queryset(mangas, request)
         serializer = MangaSerializer(result, many=True)
 

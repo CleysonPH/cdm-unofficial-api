@@ -9,6 +9,7 @@ from .views import (
     TypeViewSet,
     AuthorMangas,
     DesignerMangas,
+    GenreMangas,
 )
 
 
@@ -22,11 +23,12 @@ router.register("types", TypeViewSet, basename="type")
 
 app_name = "api"
 urlpatterns = [
-    path("authors/<str:author>/mangas/", AuthorMangas.as_view(), name="author-mangas"),
+    path("authors/<str:name>/mangas/", AuthorMangas.as_view(), name="author-mangas"),
     path(
-        "designers/<str:designer>/mangas/",
+        "designers/<str:name>/mangas/",
         DesignerMangas.as_view(),
         name="designer-mangas",
     ),
+    path("genres/<str:name>/mangas/", GenreMangas.as_view(), name="genre-mangas"),
 ]
 urlpatterns += router.urls
