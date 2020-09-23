@@ -74,3 +74,15 @@ class GenreMangas(APIView):
         serializer = MangaSerializer(result, many=True)
 
         return pagination.get_paginated_response(serializer.data)
+
+
+class TypeMangas(APIView):
+    def get(self, request, name, format=None):
+        type = get_object_or_404(Type, name=name)
+
+        pagination = PageNumberPagination()
+        mangas = Manga.objects.filter(types__id=type.id)
+        result = pagination.paginate_queryset(mangas, request)
+        serializer = MangaSerializer(result, many=True)
+
+        return pagination.get_paginated_response(serializer.data)

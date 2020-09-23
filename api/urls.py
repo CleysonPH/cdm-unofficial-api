@@ -10,6 +10,7 @@ from .views import (
     AuthorMangas,
     DesignerMangas,
     GenreMangas,
+    TypeMangas,
 )
 
 
@@ -30,5 +31,6 @@ urlpatterns = [
         name="designer-mangas",
     ),
     path("genres/<str:name>/mangas/", GenreMangas.as_view(), name="genre-mangas"),
+    path("types/<str:name>/mangas/", TypeMangas.as_view(), name="type-mangas"),
 ]
 urlpatterns += router.urls
