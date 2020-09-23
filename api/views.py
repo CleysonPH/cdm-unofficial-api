@@ -1,15 +1,16 @@
-from rest_framework import viewsets, status
-from rest_framework.response import Response
+from rest_framework import status, viewsets
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
 
+from mangas.models import Author, Designer, Genre, Manga, Type
+
 from .serializers import (
-    MangaSerializer,
     AuthorSerializer,
     DesignerSerializer,
     GenreSerializer,
+    MangaSerializer,
     TypeSerializer,
 )
-from mangas.models import Manga, Author, Designer, Genre, Type
 
 
 class MangaViewSet(viewsets.ModelViewSet):
@@ -44,7 +45,19 @@ class TypeViewSet(viewsets.ModelViewSet):
 
 class AuthorMangas(APIView):
     def get(self, request, author, format=None):
+        pagination = PageNumberPagination()
         mangas = Manga.objects.filter(author__name=author)
-        serializer = MangaSerializer(mangas, many=True)
+        result = pagination.paginate_queryset(mangas, request)
+        serializer = MangaSerializer(result, many=True)
 
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return pagination.get_paginated_response(serializer.data)
+
+
+class DesignerMangas(APIView):
+    def get(self, request, designer, format=None):
+        pagination = PageNumberPagination()
+        mangas = Manga.objects.filter(designer__name=designer)
+        result = pagination.paginate_queryset(mangas, request)
+        serializer = MangaSerializer(result, many=True)
+
+        return pagination.get_paginated_response(serializer.data)
