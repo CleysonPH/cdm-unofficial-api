@@ -1,3 +1,4 @@
+from django.urls import reverse
 from rest_framework import serializers
 
 from mangas.models import Manga, Author, Designer, Genre, Type
@@ -23,24 +24,44 @@ class MangaSerializer(serializers.ModelSerializer):
 
 
 class AuthorSerializer(serializers.ModelSerializer):
+    mangas = serializers.SerializerMethodField()
+
     class Meta:
         model = Author
-        exclude = ("created_at", "modified_at")
+        fields = ("name", "mangas")
+
+    def get_mangas(self, obj):
+        return reverse("api:author-mangas", kwargs={"name": obj.name})
 
 
 class DesignerSerializer(serializers.ModelSerializer):
+    mangas = serializers.SerializerMethodField()
+
     class Meta:
         model = Designer
-        exclude = ("created_at", "modified_at")
+        fields = ("name", "mangas")
+
+    def get_mangas(self, obj):
+        return reverse("api:designer-mangas", kwargs={"name": obj.name})
 
 
 class GenreSerializer(serializers.ModelSerializer):
+    mangas = serializers.SerializerMethodField()
+
     class Meta:
         model = Genre
-        exclude = ("created_at", "modified_at")
+        fields = ("name", "mangas")
+
+    def get_mangas(self, obj):
+        return reverse("api:genre-mangas", kwargs={"name": obj.name})
 
 
 class TypeSerializer(serializers.ModelSerializer):
+    mangas = serializers.SerializerMethodField()
+
     class Meta:
         model = Type
-        exclude = ("created_at", "modified_at")
+        fields = ("name", "mangas")
+
+    def get_mangas(self, obj):
+        return reverse("api:type-mangas", kwargs={"name": obj.name})
