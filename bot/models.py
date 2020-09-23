@@ -14,7 +14,9 @@ class BaseModel(models.Model):
 
 
 class TelegramUser(BaseModel):
-    chat_id = models.CharField("Chat ID", max_length=50, blank=False, null=False)
+    chat_id = models.CharField(
+        "Chat ID", max_length=50, blank=False, null=False, unique=True
+    )
     first_name = models.CharField("Nome", max_length=100, blank=False, null=True)
     last_name = models.CharField("Sobrenome", max_length=100, blank=False, null=True)
 
@@ -24,3 +26,4 @@ class TelegramUser(BaseModel):
     class Meta:
         verbose_name = "Usuário Telegram"
         verbose_name_plural = "Usuários Telegram"
+        ordering = ("created_at",)

@@ -5,6 +5,7 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
 
 from mangas.models import Author, Designer, Genre, Manga, Type
+from bot.models import TelegramUser
 
 from .serializers import (
     AuthorSerializer,
@@ -12,6 +13,7 @@ from .serializers import (
     GenreSerializer,
     MangaSerializer,
     TypeSerializer,
+    TelegramUserSerializer
 )
 
 
@@ -102,3 +104,9 @@ class TypeMangas(APIView):
         serializer = MangaSerializer(result, many=True)
 
         return pagination.get_paginated_response(serializer.data)
+
+
+class TelegramUserViewSet(viewsets.ModelViewSet):
+    lookup_field = "chat_id"
+    serializer_class = TelegramUserSerializer
+    queryset = TelegramUser.objects.all()

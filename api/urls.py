@@ -11,6 +11,7 @@ from .views import (
     DesignerMangas,
     GenreMangas,
     TypeMangas,
+    TelegramUserViewSet,
 )
 
 
@@ -20,6 +21,8 @@ router.register("authors", AuthorViewSet, basename="author")
 router.register("designers", DesignerViewSet, basename="designer")
 router.register("genres", GenreViewSet, basename="genre")
 router.register("types", TypeViewSet, basename="type")
+
+router.register("telegramusers", TelegramUserViewSet, basename="telegramuser")
 
 
 app_name = "api"

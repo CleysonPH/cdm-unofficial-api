@@ -2,6 +2,7 @@ from django.urls import reverse
 from rest_framework import serializers
 
 from mangas.models import Manga, Author, Designer, Genre, Type
+from bot.models import TelegramUser
 
 
 class MangaSerializer(serializers.ModelSerializer):
@@ -65,3 +66,9 @@ class TypeSerializer(serializers.ModelSerializer):
 
     def get_mangas(self, obj):
         return reverse("api:type-mangas", kwargs={"name": obj.name})
+
+
+class TelegramUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = TelegramUser
+        fields = ("id", "chat_id", "first_name", "last_name")
