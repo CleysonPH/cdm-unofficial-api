@@ -1,3 +1,4 @@
+from django.urls import path
 from rest_framework.routers import DefaultRouter
 
 from .views import (
@@ -6,6 +7,7 @@ from .views import (
     DesignerViewSet,
     GenreViewSet,
     TypeViewSet,
+    AuthorMangas,
 )
 
 
@@ -18,5 +20,7 @@ router.register("types", TypeViewSet, basename="type")
 
 
 app_name = "api"
-urlpatterns = []
+urlpatterns = [
+    path("authors/<str:author>/mangas/", AuthorMangas.as_view(), name="author-mangas"),
+]
 urlpatterns += router.urls

@@ -1,4 +1,6 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from .serializers import (
     MangaSerializer,
@@ -17,11 +19,13 @@ class MangaViewSet(viewsets.ModelViewSet):
 
 
 class AuthorViewSet(viewsets.ModelViewSet):
+    lookup_field = "name"
     serializer_class = AuthorSerializer
     queryset = Author.objects.all()
 
 
 class DesignerViewSet(viewsets.ModelViewSet):
+    lookup_field = "name"
     serializer_class = DesignerSerializer
     queryset = Designer.objects.all()
 
@@ -36,3 +40,11 @@ class TypeViewSet(viewsets.ModelViewSet):
     lookup_field = "name"
     serializer_class = TypeSerializer
     queryset = Type.objects.all()
+
+
+class AuthorMangas(APIView):
+    def get(self, request, author, format=None):
+        mangas = Manga.objects.filter(author__name=author)
+        serializer = MangaSerializer(mangas, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
