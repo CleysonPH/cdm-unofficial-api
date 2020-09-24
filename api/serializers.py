@@ -78,3 +78,11 @@ class SubscriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subscription
         fields = ("id", "telegram_user", "manga")
+
+
+class TelegramUserSubscriptionSerializer(serializers.ModelSerializer):
+    manga = MangaSerializer()
+
+    class Meta:
+        model = Subscription
+        fields = ["manga"]

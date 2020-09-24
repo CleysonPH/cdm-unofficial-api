@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import status, viewsets, filters
+from rest_framework import status, viewsets, filters, generics
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -16,6 +16,7 @@ from .serializers import (
     TypeSerializer,
     TelegramUserSerializer,
     SubscriptionSerializer,
+    TelegramUserSubscriptionSerializer,
 )
 
 
@@ -138,3 +139,12 @@ class SubiscribeTelegramUser(APIView):
         subscription.delete()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class TelegramUserSubscriptions(generics.ListAPIView):
+    serializer_class = TelegramUserSubscriptionSerializer
+
+    def get_queryset(self):
+        return Subscription.objects.filter(
+            telegram_user__chat_id=self.kwargs.get("chat_id")
+        )

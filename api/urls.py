@@ -13,6 +13,7 @@ from .views import (
     TypeMangas,
     TelegramUserViewSet,
     SubiscribeTelegramUser,
+    TelegramUserSubscriptions,
 )
 
 
@@ -40,6 +41,11 @@ urlpatterns = [
         "telegramusers/<str:chat_id>/subscribe/<str:cdm_id>/",
         SubiscribeTelegramUser.as_view(),
         name="subscribe",
+    ),
+    path(
+        "telegramusers/<str:chat_id>/subscriptions/",
+        TelegramUserSubscriptions.as_view(),
+        name="telegram-user-subscriptions",
     ),
 ]
 urlpatterns += router.urls
