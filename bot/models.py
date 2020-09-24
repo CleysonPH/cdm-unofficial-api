@@ -49,3 +49,4 @@ class Subscription(BaseModel):
         verbose_name = "Inscrição"
         verbose_name_plural = "Inscrições"
         ordering = ("created_at",)
+        unique_together = ["telegram_user", "manga"]
