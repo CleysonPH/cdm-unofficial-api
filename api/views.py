@@ -3,9 +3,10 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import status, viewsets, filters
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.views import APIView
+from rest_framework.response import Response
 
 from mangas.models import Author, Designer, Genre, Manga, Type
-from bot.models import TelegramUser
+from bot.models import TelegramUser, Subscription
 
 from .serializers import (
     AuthorSerializer,
@@ -14,6 +15,7 @@ from .serializers import (
     MangaSerializer,
     TypeSerializer,
     TelegramUserSerializer,
+    SubscriptionSerializer,
 )
 
 
@@ -110,3 +112,29 @@ class TelegramUserViewSet(viewsets.ModelViewSet):
     lookup_field = "chat_id"
     serializer_class = TelegramUserSerializer
     queryset = TelegramUser.objects.all()
+
+
+class SubiscribeTelegramUser(APIView):
+    def post(self, request, chat_id, cdm_id, format=None):
+        telegram_user = get_object_or_404(TelegramUser, chat_id=chat_id)
+        manga = get_object_or_404(Manga, cdm_id=cdm_id)
+        serializer = SubscriptionSerializer(
+            data={"telegram_user": telegram_user.id, "manga": manga.id}
+        )
+
+        if serializer.is_valid():
+            subscription = serializer.save()
+
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, chat_id, cdm_id, format=None):
+        telegram_user = get_object_or_404(TelegramUser, chat_id=chat_id)
+        manga = get_object_or_404(Manga, cdm_id=cdm_id)
+        subscription = get_object_or_404(
+            Subscription, telegram_user=telegram_user, manga=manga
+        )
+
+        subscription.delete()
+
+        return Response(status=status.HTTP_204_NO_CONTENT)

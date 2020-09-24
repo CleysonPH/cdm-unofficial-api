@@ -2,7 +2,7 @@ from django.urls import reverse
 from rest_framework import serializers
 
 from mangas.models import Manga, Author, Designer, Genre, Type
-from bot.models import TelegramUser
+from bot.models import TelegramUser, Subscription
 
 
 class MangaSerializer(serializers.ModelSerializer):
@@ -72,3 +72,9 @@ class TelegramUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = TelegramUser
         fields = ("id", "chat_id", "first_name", "last_name")
+
+
+class SubscriptionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subscription
+        fields = ("id", "telegram_user", "manga")
