@@ -13,7 +13,7 @@ from .serializers import (
     GenreSerializer,
     MangaSerializer,
     TypeSerializer,
-    TelegramUserSerializer
+    TelegramUserSerializer,
 )
 
 

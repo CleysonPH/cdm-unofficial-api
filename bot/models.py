@@ -27,3 +27,25 @@ class TelegramUser(BaseModel):
         verbose_name = "Usuário Telegram"
         verbose_name_plural = "Usuários Telegram"
         ordering = ("created_at",)
+
+
+class Subscription(BaseModel):
+    telegram_user = models.ForeignKey(
+        "bot.TelegramUser",
+        verbose_name="Telegram User",
+        on_delete=models.CASCADE,
+        blank=False,
+        null=False,
+    )
+    manga = models.ForeignKey(
+        "mangas.Manga",
+        verbose_name="Manga",
+        on_delete=models.CASCADE,
+        blank=False,
+        null=False,
+    )
+
+    class Meta:
+        verbose_name = "Inscrição"
+        verbose_name_plural = "Inscrições"
+        ordering = ("created_at",)
