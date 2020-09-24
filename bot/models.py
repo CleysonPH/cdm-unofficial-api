@@ -21,7 +21,7 @@ class TelegramUser(BaseModel):
     last_name = models.CharField("Sobrenome", max_length=100, blank=False, null=True)
 
     def __str__(self):
-        return self.chat_id
+        return f"{self.chat_id} - {self.first_name}"
 
     class Meta:
         verbose_name = "Usuário Telegram"
