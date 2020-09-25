@@ -17,6 +17,7 @@ from .serializers import (
     TelegramUserSerializer,
     SubscriptionSerializer,
     TelegramUserSubscriptionSerializer,
+    MangaSubscritionSerializer,
 )
 
 
@@ -148,3 +149,10 @@ class TelegramUserSubscriptions(generics.ListAPIView):
         return Subscription.objects.filter(
             telegram_user__chat_id=self.kwargs.get("chat_id")
         )
+
+
+class MangaSubscriptions(generics.ListAPIView):
+    serializer_class = MangaSubscritionSerializer
+
+    def get_queryset(self):
+        return Subscription.objects.filter(manga__cdm_id=self.kwargs.get("cdm_id"))
